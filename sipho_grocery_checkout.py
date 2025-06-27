@@ -120,7 +120,7 @@ def handle_cost(budget_input, adjusted_costs_items):
                 removed_cost = cost_selected_items.pop(index_to_remove)
                 item_index = grocery_items.index(item_to_remove)
                 quantity_items[item_index] += 1
-                costs_items -= removed_cost
+                adjusted_costs_items -= removed_cost
                 print(
                     f"{item_to_remove} removed. New total: R{adjusted_costs_items}")
                 break
