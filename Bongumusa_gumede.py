@@ -1,66 +1,48 @@
-menu = {
-    "cheese": 3,
-    "milk": 10,
-    "bread": 20,
-    "coke": 14,
-    "fanta": 14,
-    "yoghurt": 25,
-    "stony drink ": 15,
-    "rice": 30,
-    "maize": 25,
-    "noodles": 10,
-    "soap": 10
+import modules
+import math
+
+menu_dict = {
+    1: ["milk 500l", 20, 10, 515],  # key, item, quantity, price, weight in grams ( using density)
+    2: ["milk 1l", 10, 20, 1030],
+    3: ["coke 500ml", 10, 11, 500],
+    4: ["fanta 500ml", 11, 10, 500],
+    5: ["stony 500ml", 3, 10, 500],
+    6: ["sprite 500ml", 7, 10, 500],
+    7: ["coke 1l", 50, 18, 1000],
+    8: ["fanta 1l", 13, 16, 1000],
+    9: ["stony 1l", 15, 16, 1000],
+    10: ["sprite 1l", 18,  16, 1000],
+    11: ["cheese slice", 20, 3, 28],
+    12: ["eggs 6 pack", 33, 14, 348],
+    13: ["rama 500g", 15,  13, 500],
+    14: ["russian 60g", 60, 8, 60],
+    15: ["arch 500g", 14, 50, 500],
+    16: ["sugar 500g", 60, 14, 500],
+    17: ["frisco 200g", 55,  23, 200],
+    18: ["fries 71g", 13,  10, 71],
+    19: ["fries 117g", 32, 16, 117],
+    20: ["fries 190g", 10, 16, 1000],
+
 }
 
-cart =[]
-total = 0
 
-print("------------MENU--------------------")
-for key, value in menu.items():
-    print(f"{key:10}: R{value:.2f}")
+print("*******************************************menu items ***********************************")
+modules.display_menu(menu_dict)
 
-print("-------------------------------------")
+print("*******************************************Purchasing ***********************************")
+cart = modules.item_selection(menu_dict)
+print("******************************************** Your cart ************************************")
+total_amount_of_items = 0
+total_amount_of_delivary = 0
+for items in cart:
+    print(f"{items[0]}--R{items[1]}\n quantity : {items[2]}, \n total price: R{items[3]},\n delivary cost R{items[4]}\n")
+    total_amount_of_items += items[3]
+    total_amount_of_delivary += items[4]
 
-while True:
-    food = input("select an item (q to proceed to cart or cancel): ").lower()
-    if food == "q":
-        break
-    elif menu.get(food) is not None:
-        cart.append(food)
-        total += menu[food]
-    elif menu.get(food) != menu.items():
-        print(f" We do not sell {food} here\n please enter the food in the list")
+print(f"total amount to pay: R{total_amount_of_items: .2f}\ntotal amount od delivary: R{total_amount_of_delivary: .2f}")
 
 
-print("--------------------YOR ORDER--------------")
-print("\nItems in your cart:")
-for item in cart:
-    print(f"- {item}: R{menu[item]:.2f}")
-print(f"Total: R{total:.2f}")
+payment = input("procced to payment yes or no: ").lower()
 
-print()
-print(f"Total is: R{total:.2f}")
-
-payment_amount = input("Enter amount you to pay: ")
-payment = float(payment_amount)
-if payment >= total:
-    change = payment - total
-    print(f"Your change is :R{change:.2f}")
-    print("Thank you goodbye")
-elif payment < total:
-    short_amount = total - payment
-    print(f"your payment is short by: R{short_amount}")
-    add_amount = input("Do you want to add_amount or cancel  purchase (Yes/No)").lower()
-    if add_amount == "yes":
-        add_payment = float(input("Enter amount you want to add: "))
-        change = add_payment - short_amount
-        print(f"Your change is :R{change:.2f}")
-        print("Thank you goodbye")
-    else:
-        print(" You do not afford , that okay we understand the economy is not good for everyone ")
-else:
-    print(" You do not afford , that okay we understand the economy is not good for everyone ")
-
-
-
-
+print("************************************payment***************************************")
+modules.checkout(payment, cart, total_amount_of_items, total_amount_of_delivary)
