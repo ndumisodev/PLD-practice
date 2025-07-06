@@ -87,13 +87,6 @@ def clear():
 
 
 
-
-
-
-
-
-
-
 #send email 
 
 
@@ -114,14 +107,6 @@ def send_email():
            messagebox.showerror('Error', "Something went wrong , Please try again", parent =root1)
 
            
-
-    
-    
-    
-
-
-
-
     if textarea.get(1.0,END)=='\n':
         messagebox.showerror('Error', 'No Bill Found')
     else:
