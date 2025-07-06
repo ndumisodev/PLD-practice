@@ -57,12 +57,12 @@ setup(
     ]
 )
 
-# 📂 Auto-open the output folder after build (optional for course demonstration)
+#  Auto-open the output folder after build (optional for course demonstration)
 if os.path.exists("build"):
-    print("\n✅ Build complete! Opening build folder...\n")
+    print("\n Build complete! Opening build folder...\n")
     if sys.platform == "win32":
         subprocess.Popen(f'explorer "{os.path.abspath("build")}"')
     else:
-        print("🟡 Auto-open only supported on Windows.")
+        print(" Auto-open only supported on Windows.")
 else:
-    print("⚠️ Build folder not found.")
+    print(" Build folder not found.")
